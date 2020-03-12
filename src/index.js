@@ -37,8 +37,28 @@ const MORSE_TABLE = {
     '-----':  '0',
 };
 
+let SPACE = '**********';
+let DOT = '10';
+let DASH = '11';
+
 function decode(expr) {
-    // write your solution here
+    let result = '';
+    expr.match(/.{1,10}/g).forEach( letter => {
+        if (letter == SPACE) {
+            result += ' ';
+        } else {
+            let str = '';
+            letter.match(/.{1,2}/g).forEach( char => {
+                if (char == DOT) {
+                    str += '.';
+                }
+                if (char == DASH)
+                    str += '-';
+            });
+            result += MORSE_TABLE[str];
+        }
+    });
+    return result;
 }
 
 module.exports = {
